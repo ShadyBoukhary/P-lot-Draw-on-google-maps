@@ -1,6 +1,5 @@
 import json
 
-
 class Point(object):
     def __init__(self, latitude, longitude):
         self.latitude = latitude
@@ -22,10 +21,6 @@ fouthPoint = Point(33.873386, -98.520179)
 latDiff = 0.000046
 longDiff = 0.000036
 
-# startingPoint = Point(33.873312, -98.520100)
-# secondPoint = Point(33.873312, -98.520072)
-# thirdPoint = Point(33.873266, -98.520072)
-# fouthPoint = Point(33.873266, -98.520100)
 spaceId = 1
 roundby = 7
 
@@ -35,10 +30,12 @@ data = {
 }
 data['features'] = []
 
+# 34 spaces top row
+# 4 middle rows
 # 32 per middle row
+# 34 spaces last row
 for x in range(0, 197):
     
-
     data['features'].append({
         'type': 'Feature',
         'properties': {
@@ -58,10 +55,11 @@ for x in range(0, 197):
         }
     })
 
- 
-    # start at 2nd middle row 
+    # first spot, handicapped, larger than others
     if x == 0:
         startingPoint = Point(33.873432, -98.520131)
+    # another handicapped spot, same row
+    # change size to normal after drawing handicapped spots
     elif x == 1:
         longDiff = 0.0000296
         startingPoint = Point(secondPoint.latitude, secondPoint.longitude)
@@ -69,19 +67,23 @@ for x in range(0, 197):
         startingPoint = Point(33.873432, -98.519412)
     elif x == 33:
         startingPoint = Point(33.873312, -98.520100)
+    # start of 2nd row
     elif x == 65:
         startingPoint = Point(33.873245, -98.520100)
-    # start at 3rd middle row
+    # start of 3rd row
     elif x == 97:
         startingPoint = Point(33.873135, -98.520100)
-    # start at 4th middle row
+    # start of 4th row
     elif x == 129:
         startingPoint = Point(33.873068, -98.520100)
+    # start of last row
     elif x == 161:
         startingPoint = Point(33.872951, -98.520182)
+    # continue on same row
     else:
         startingPoint = Point(secondPoint.latitude, secondPoint.longitude)
 
+    # calculate the rest of the points of the polygon using the first point
     secondPoint = Point(startingPoint.latitude, startingPoint.longitude + longDiff)
     thirdPoint = Point(secondPoint.latitude - latDiff, secondPoint.longitude)
     fouthPoint = Point(startingPoint.latitude - latDiff, startingPoint.longitude)
