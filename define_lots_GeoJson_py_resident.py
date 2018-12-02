@@ -78,11 +78,11 @@ print("Enter the number of the lot to define spots for:\n"
 while run:
     spaceId = 1
     lotChoice = input()
-    if lotChoice == 1:
+    if lotChoice == '1':
         lot = 'bolin'
         longDiff = 0.000036
         maxSpaces = 197
-    elif lotChoice == 2:
+    elif lotChoice == '2':
         lot = 'py-resident'
         longDiff = 0.0000276
         maxSpaces = 155
@@ -90,18 +90,24 @@ while run:
         secondPoint = Point(33.873379, -98.5217325)
         thirdPoint = Point(33.873333, -98.5217325)
         fouthPoint = Point(33.873333, -98.521760)
-    elif lotChoice == 3:
+    elif lotChoice == '3':
         lot = 'py-reserved'
-    elif lotChoice == 4:
+        # TODO: Implement
+    elif lotChoice == '4':
         lot = 'py-commuter'
-    elif lotChoice == 5:
+        # TODO: Implement
+    elif lotChoice == '5':
         lot = 'library-commuter'
-    elif lotChoice == 6:
+        # TODO: Implement
+    elif lotChoice == '6':
         lot = 'library-reserved'
-    elif lotChoice == 0:
+        # TODO: Implement
+    elif lotChoice == '0':
         run = False
+        # TODO: Implement
     else:
         print ("Try again.")
+        run = False
     
     if run:
         data = {
@@ -119,7 +125,8 @@ while run:
             data['features'].append({
                 'type': 'Feature',
                 'properties': {
-                    'spaceNum': spaceId
+                    'spaceNum': spaceId,
+                    'lot': lot
                 },
                 'geometry': {
                     "type": "Polygon",
